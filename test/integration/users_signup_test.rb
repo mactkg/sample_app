@@ -12,6 +12,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       }
     end
     assert_template 'users/new'
+    assert_select '#error_explanation'
+    assert_select '.alert'
   end
 
   test "valid signup information" do
@@ -24,6 +26,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
         password_confirmation: "password"
       }
       assert_template 'users/show'
+      assert_not flash.empty?
     end
   end
 end
